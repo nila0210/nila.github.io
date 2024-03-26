@@ -1,5 +1,4 @@
 const outputDiv = document.getElementById('output');
-const startButton = document.getElementById('start');
 
 // Speech Recognition
 const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition || window.mozSpeechRecognition || window.msSpeechRecognition)();
@@ -21,7 +20,10 @@ recognition.onresult = function(event) {
   }, 5000);
 };
 
-// Start listening
-startButton.addEventListener('click', function() {
+recognition.onend = function() {
+  // Restart recognition when it ends
   recognition.start();
-});
+};
+
+// Start listening automatically
+recognition.start();
