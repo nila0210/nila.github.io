@@ -20,10 +20,12 @@ recognition.onresult = function(event) {
   }, 5000);
 };
 
-recognition.onend = function() {
-  // Restart recognition when it ends
-  recognition.start();
-};
-
 // Start listening automatically
 recognition.start();
+
+// Restart recognition after a short pause
+recognition.onend = function() {
+  setTimeout(function() {
+    recognition.start();
+  }, 1000); // Restart after 1 second
+};
